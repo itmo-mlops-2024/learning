@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "predict-ticket-price"
+version = "0.1.0"
+description = "ML model to predict ticket prices"
+authors = ["Vladimir Klepov <v.klepov@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.3"
+catboost = "^1.2.7"
+scikit-learn = "^1.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

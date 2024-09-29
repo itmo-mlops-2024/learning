@@ -2,14 +2,18 @@ name: Test PR
 on: pull_request
 
 jobs:
-  test:
+  warm_cache:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-          cache: 'pip' # caching pip dependencies
+          cache: 'poetry' # caching pip dependencies
+      - name: Install poetry
+        run: pip install poetry
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: poetry install
+  check_lockfiles:
+    runs-on: ubuntu-latest
