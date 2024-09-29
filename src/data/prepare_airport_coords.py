@@ -14,9 +14,7 @@ def prepare_airport_coords(iata_path, lat_lon_path, output):
         usecols=(1,),
         names=("iata",),
     )
-    airport_latlon = pd.read_csv(
-        lat_lon_path, header=None, names=("lat", "lon")
-    )
+    airport_latlon = pd.read_csv(lat_lon_path, header=None, names=("lat", "lon"))
 
     df = pd.concat((airports_iata, airport_latlon), axis=1).dropna()
 
