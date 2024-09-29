@@ -12,7 +12,9 @@ def train_model():
     X_test = df_test.drop(target, axis=1)
     y_test = df_test[target]
 
-    cb_model = CatBoostRegressor().fit(X_train, y_train, eval_set=(X_test,y_test))
+    cb_model = CatBoostRegressor(
+        cat_features=('startingAirport', 'destinationAirport')
+    ).fit(X_train, y_train, eval_set=(X_test,y_test))
 
     cb_model.save_model('./models/model.cbm')
 
