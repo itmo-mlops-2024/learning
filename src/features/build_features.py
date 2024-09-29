@@ -1,9 +1,14 @@
+import click
 import pandas as pd
 
 
-def build_features():
-    df = pd.read_csv("./data/interim/flights.csv")
-    coords = pd.read_csv("./data/interim/airport_coords.csv").set_index("iata")
+@click.command()
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("airport_coords", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+def build_features(input, airport_coords, output):
+    df = pd.read_csv(input)
+    coords = pd.read_csv(airport_coords).set_index("iata")
 
     df["stops"] = df["segmentsArrivalAirportCode"].str.count(r"\|\|")
 
@@ -32,7 +37,7 @@ def build_features():
     for col in airport_columns:
         df = df.set_index(col).join(coords, rsuffix=f"_{col}").reset_index()
 
-    df.to_csv("./data/processed/flights.csv", index=False)
+    df.to_csv(output, index=False)
 
 
 if __name__ == "__main__":

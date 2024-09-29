@@ -19,6 +19,8 @@ python = "^3.10"
 pandas = "^2.2.3"
 catboost = "^1.2.7"
 scikit-learn = "^1.5.2"
+click = "^8.1.7"
+dvc = "^3.55.2"
 
 
 [tool.poetry.group.dev.dependencies]

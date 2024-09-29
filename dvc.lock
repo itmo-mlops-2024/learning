@@ -1,0 +1,123 @@
+schema: '2.0'
+stages:
+  clean_data:
+    cmd: python src/data/clean.py ./data/raw/itineraries_random_2M.csv ./data/interim/flights.csv
+    deps:
+    - path: ./data/raw/itineraries_random_2M.csv
+      hash: md5
+      md5: ed6c0a18d79172dd5f52fd31ccd78290
+      size: 744499798
+    - path: ./src/data/clean.py
+      hash: md5
+      md5: fb5c188602cb8c012697fb12974fc756
+      size: 1506
+    outs:
+    - path: ./data/interim/flights.csv
+      hash: md5
+      md5: 0960a35900b34147288c5215af254495
+      size: 188465806
+  prepare_airport_coords:
+    cmd: python src/data/prepare_airport_coords.py ./data/external/GlobalAirportDatabase.txt
+      ./data/external/gadb_declatlon.csv ./data/interim/airport_coords.csv
+    deps:
+    - path: ./data/external/GlobalAirportDatabase.txt
+      hash: md5
+      md5: e35c7eadf12913d5915693db723b0fb2
+      size: 760437
+    - path: ./data/external/gadb_declatlon.csv
+      hash: md5
+      md5: f37a8527b9fddf77451203fc13cf73bf
+      size: 60132
+    - path: src/data/prepare_airport_coords.py
+      hash: md5
+      md5: fadf6e995f21bac6472c788e3c665f64
+      size: 682
+    outs:
+    - path: ./data/interim/airport_coords.csv
+      hash: md5
+      md5: b0389bfc41e77cc14f3ebcdb31bcb163
+      size: 32305
+  build_features:
+    cmd: python src/features/build_features.py ./data/interim/flights.csv ./data/interim/airport_coords.csv
+      ./data/processed/flights.csv
+    deps:
+    - path: ./data/interim/airport_coords.csv
+      hash: md5
+      md5: b0389bfc41e77cc14f3ebcdb31bcb163
+      size: 32305
+    - path: ./data/interim/flights.csv
+      hash: md5
+      md5: 0960a35900b34147288c5215af254495
+      size: 188465806
+    - path: src/features/build_features.py
+      hash: md5
+      md5: dee6bd50831d2f2858bddae8b4b3bda3
+      size: 1286
+    outs:
+    - path: ./data/processed/flights.csv
+      hash: md5
+      md5: eeecb0a2b6244d843df5c4c42f790697
+      size: 98288701
+  train_test_split:
+    cmd: python src/models/train_test_split.py ./data/processed/flights.csv ./data/processed/train.csv
+      ./data/processed/test.csv
+    deps:
+    - path: ./data/processed/flights.csv
+      hash: md5
+      md5: eeecb0a2b6244d843df5c4c42f790697
+      size: 98288701
+    - path: ./src/models/train_test_split.py
+      hash: md5
+      md5: 67bbaadc8c140429ae599a9f333eed9d
+      size: 497
+    outs:
+    - path: ./data/processed/test.csv
+      hash: md5
+      md5: ca45a7aec4d04579ece9572f5cec0f89
+      size: 24571335
+    - path: ./data/processed/train.csv
+      hash: md5
+      md5: c8c2aa8a8a597618f2e0db0238f0ded7
+      size: 73717516
+  train:
+    cmd: python src/models/train_model.py ./data/processed/train.csv ./data/processed/test.csv
+      ./models/model.cbm
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: ca45a7aec4d04579ece9572f5cec0f89
+      size: 24571335
+    - path: data/processed/train.csv
+      hash: md5
+      md5: c8c2aa8a8a597618f2e0db0238f0ded7
+      size: 73717516
+    - path: src/models/train_model.py
+      hash: md5
+      md5: 19c17faf1cf04cb35a590be54db4234e
+      size: 769
+    outs:
+    - path: models/model.cbm
+      hash: md5
+      md5: 2342d3f20f252a722da4833d46a761fa
+      size: 1438364
+  evaluate:
+    cmd: python src/models/evaluate.py ./models/model.cbm ./data/processed/test.csv
+      ./reports/score.csv
+    deps:
+    - path: ./data/processed/test.csv
+      hash: md5
+      md5: ca45a7aec4d04579ece9572f5cec0f89
+      size: 24571335
+    - path: ./models/model.cbm
+      hash: md5
+      md5: 2342d3f20f252a722da4833d46a761fa
+      size: 1438364
+    - path: src/models/evaluate.py
+      hash: md5
+      md5: 102c4926fa9f0bf91b4d53defee2c627
+      size: 834
+    outs:
+    - path: ./reports/score.csv
+      hash: md5
+      md5: d442ff6207c11e5e3bad0e58e47fe38c
+      size: 46

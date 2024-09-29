@@ -1,8 +1,12 @@
+import click
 import pandas as pd
 
 
-def clean_data():
-    df = pd.read_csv("./data/raw/itineraries_random_2M.csv")
+@click.command()
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+def clean_data(input, output):
+    df = pd.read_csv(input)
 
     # remove low-frequency cases
     is_premium = (
@@ -50,7 +54,7 @@ def clean_data():
         df["travelDuration"].str.split(r"[^0-9]+").map(parse_duration)
     )
 
-    df.to_csv("./data/interim/flights.csv", index=False)
+    df.to_csv(output, index=False)
 
 
 if __name__ == "__main__":
