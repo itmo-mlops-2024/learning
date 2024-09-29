@@ -1,12 +1,12 @@
 import pandas as pd
-from catboost import Pool, CatBoostRegressor
+from catboost import CatBoostRegressor
 
 target = 'totalFare'
 
 def train_model():
     df_train = pd.read_csv('./data/processed/train.csv')
     df_test = pd.read_csv('./data/processed/test.csv')
-    
+
     X_train = df_train.drop(target, axis=1)
     y_train = df_train[target]
     X_test = df_test.drop(target, axis=1)
