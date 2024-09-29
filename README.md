@@ -1,11 +1,26 @@
-predict_ticket_price
-==============================
+# predict_ticket_price
 
 ML model to predict ticket prices
 
-Project Organization
-------------
+## Getting started
 
+```sh
+pip install poetry
+poetry install
+poetry run pre-commit install
+```
+
+## Useful commands
+
+```sh
+# lint & format all files (e.g. after rebase / commit --no-verify)
+poetry run ruff check --fix
+poetry run ruff format
+```
+
+## Project Organization
+
+```
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
@@ -51,7 +66,6 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-
---------
+```
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
