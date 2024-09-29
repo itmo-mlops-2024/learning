@@ -13,6 +13,8 @@ poetry run pre-commit install
 ## Useful commands
 
 ```sh
+# fetch fresh data
+poetry run dvc pull
 # re-run model training
 poetry run dvc repro
 # lint & format all files (e.g. after rebase / commit --no-verify)
