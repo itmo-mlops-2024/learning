@@ -26,3 +26,12 @@ jobs:
       - uses: chartboost/ruff-action@v1
         with:
           args: format --check
+  repro:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/prepare-env
+      - name: Pull
+        run: poetry run dvc pull
+      - name: repro
+        run: poetry run dvc repro
