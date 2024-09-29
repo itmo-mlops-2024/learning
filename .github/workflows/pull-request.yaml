@@ -26,3 +26,15 @@ jobs:
       - uses: chartboost/ruff-action@v1
         with:
           args: format --check
+  repro:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/prepare-env
+      - name: Install dependencies
+        run: poetry install
+      - name: repro
+        run: poetry run dvc repro --pull
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

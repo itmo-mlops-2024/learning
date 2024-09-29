@@ -1,0 +1,5 @@
+[core]
+    remote = origin
+['remote "origin"']
+    url = s3://thoughtspile
+    endpointurl = https://storage.yandexcloud.net/
