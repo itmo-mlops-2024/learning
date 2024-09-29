@@ -1,0 +1,5 @@
+outs:
+- md5: ed6c0a18d79172dd5f52fd31ccd78290
+  size: 744499798
+  hash: md5
+  path: itineraries_random_2M.csv

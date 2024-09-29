@@ -1,0 +1,5 @@
+outs:
+- md5: f37a8527b9fddf77451203fc13cf73bf
+  size: 60132
+  hash: md5
+  path: gadb_declatlon.csv

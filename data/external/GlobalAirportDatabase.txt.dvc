@@ -1,0 +1,5 @@
+outs:
+- md5: e35c7eadf12913d5915693db723b0fb2
+  size: 760437
+  hash: md5
+  path: GlobalAirportDatabase.txt
