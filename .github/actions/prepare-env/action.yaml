@@ -1,0 +1,13 @@
+name: 'Prepare poetry'
+description: 'Prepare python@3.10 with poetry'
+runs:
+  using: "composite"
+  steps:
+    - name: Install poetry
+      run: pip install poetry
+      shell: bash
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: 'poetry' # caching poetry dependencies

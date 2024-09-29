@@ -6,20 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install poetry
-        run: pip install poetry
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-          cache: 'poetry' # caching poetry dependencies
+      - uses: ./.github/actions/prepare-env
       - name: Install dependencies
         run: poetry install
   check_lockfiles:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install poetry
-        run: pip install poetry
+      - uses: ./.github/actions/prepare-env
       - name: Check lockfiles
         run: poetry check --lock
