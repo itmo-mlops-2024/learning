@@ -6,12 +6,24 @@ authors = ["Vladimir Klepov <v.klepov@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
+[tool.ruff]
+lint.select = ["E", "F", "N", "S", "I", "D"]
+lint.fixable = ["ALL"]
+# Avoid enforcing docstrings for everyting
+lint.ignore = ["D100", "D103", "D104", "D211", "D212"]
+# Avoid trying to fix flake8-bugbear
+lint.unfixable = ["B"]
+
 [tool.poetry.dependencies]
 python = "^3.10"
 pandas = "^2.2.3"
 catboost = "^1.2.7"
 scikit-learn = "^1.5.2"
 
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.8"
+pre-commit = "^3.8.0"
 
 [build-system]
 requires = ["poetry-core"]
