@@ -2,6 +2,7 @@ import pandas as pd
 
 def build_features():
     df = pd.read_csv('./data/interim/flights.csv')
+    coords = pd.read_csv('./data/interim/airport_coords.csv').set_index('iata')
 
     df['stops'] = df['segmentsArrivalAirportCode'].str.count(r'\|\|')
 
@@ -21,6 +22,11 @@ def build_features():
         'segmentsDurationInSeconds',
         # 'travelDuration',
     ], axis=1)
+
+    # encode airports to lat/lon
+    airport_columns = ['startingAirport', 'destinationAirport']
+    for col in airport_columns:
+        df = df.set_index(col).join(coords, rsuffix=f'_{col}').reset_index()
 
     df.to_csv('./data/processed/flights.csv', index=False)
 
