@@ -22,12 +22,6 @@ def build_features():
         # 'travelDuration',
     ], axis=1)
 
-    # one-hot encode airports
-    categorical_columns = ['startingAirport', 'destinationAirport']
-    for col in categorical_columns:
-        col_ohe = pd.get_dummies(df[col], prefix=col).astype(int)
-        df = pd.concat((df, col_ohe), axis=1).drop(col, axis=1)
-
     df.to_csv('./data/processed/flights.csv', index=False)
 
 
