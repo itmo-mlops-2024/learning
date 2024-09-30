@@ -4,10 +4,12 @@ import click
 import mlflow
 import pandas as pd
 from catboost import CatBoostRegressor
+from dotenv import load_dotenv
 from mlflow.catboost import log_model
 from mlflow.models.signature import infer_signature
 from sklearn.metrics import mean_absolute_percentage_error, r2_score
 
+load_dotenv()
 remote_server_uri = os.getenv("MLFLOW_TRACKING_URI")
 mlflow.set_tracking_uri(remote_server_uri)
 

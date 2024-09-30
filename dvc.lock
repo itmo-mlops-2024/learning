@@ -93,12 +93,12 @@ stages:
       size: 73717516
     - path: src/models/train_model.py
       hash: md5
-      md5: b586d7e18b1e36d8ac0f3523bcc1124b
-      size: 1851
+      md5: 30e764acd9798e15a508e0bcc19d8c81
+      size: 1785
     outs:
     - path: models/model.cbm
       hash: md5
-      md5: 33c755214e52f9cf0af6e172514debf5
+      md5: 833121e8f5f61d97f84f03b92864686e
       size: 1438364
   evaluate:
     cmd: python src/models/evaluate.py ./models/model.cbm ./data/processed/test.csv
@@ -110,7 +110,7 @@ stages:
       size: 24571335
     - path: ./models/model.cbm
       hash: md5
-      md5: 33c755214e52f9cf0af6e172514debf5
+      md5: 833121e8f5f61d97f84f03b92864686e
       size: 1438364
     - path: src/models/evaluate.py
       hash: md5
