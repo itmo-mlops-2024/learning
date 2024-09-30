@@ -30,8 +30,8 @@ stages:
       size: 60132
     - path: src/data/prepare_airport_coords.py
       hash: md5
-      md5: fadf6e995f21bac6472c788e3c665f64
-      size: 682
+      md5: 27a73a68ebade66721fc0426efe9e265
+      size: 668
     outs:
     - path: ./data/interim/airport_coords.csv
       hash: md5
@@ -93,12 +93,12 @@ stages:
       size: 73717516
     - path: src/models/train_model.py
       hash: md5
-      md5: 19c17faf1cf04cb35a590be54db4234e
-      size: 769
+      md5: b586d7e18b1e36d8ac0f3523bcc1124b
+      size: 1851
     outs:
     - path: models/model.cbm
       hash: md5
-      md5: 2342d3f20f252a722da4833d46a761fa
+      md5: 33c755214e52f9cf0af6e172514debf5
       size: 1438364
   evaluate:
     cmd: python src/models/evaluate.py ./models/model.cbm ./data/processed/test.csv
@@ -110,7 +110,7 @@ stages:
       size: 24571335
     - path: ./models/model.cbm
       hash: md5
-      md5: 2342d3f20f252a722da4833d46a761fa
+      md5: 33c755214e52f9cf0af6e172514debf5
       size: 1438364
     - path: src/models/evaluate.py
       hash: md5
